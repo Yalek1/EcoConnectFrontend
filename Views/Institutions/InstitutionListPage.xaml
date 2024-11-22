@@ -1,0 +1,47 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EcoConnectFrontend.ViewModels"
+             x:Class="EcoConnectFrontend.Views.Institutions.InstitutionListPage"
+             BindingContext="{x:Static vm:InstitutionsViewModel.Instance}">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="10">
+            <!-- Logo -->
+            <Image Source="logo.png" HeightRequest="50" HorizontalOptions="Center" />
+
+            <!-- Título -->
+            <Label Text="Instituciones"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,5" />
+
+            <!-- Botones -->
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Agregar" Command="{Binding AddCommand}" />
+                <Button Text="Editar" Command="{Binding EditCommand}" />
+                <Button Text="Eliminar" Command="{Binding DeleteCommand}" />
+            </HorizontalStackLayout>
+
+            <!-- Imágenes de Instituciones -->
+            <CollectionView ItemsSource="{Binding Institutions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="5" Margin="5">
+                            <Image Source="{Binding Logo}" HeightRequest="70" WidthRequest="70" />
+                            <Label Text="{Binding Name}" HorizontalTextAlignment="Center" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Registros -->
+            <Label Text="Registros" FontSize="18" FontAttributes="Bold" Margin="0,10,0,5" />
+            <ListView ItemsSource="{Binding Institutions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
